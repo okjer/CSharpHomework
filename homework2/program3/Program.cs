@@ -10,6 +10,31 @@ namespace program3
     {
         static void Main(string[] args)
         {
+            int n = 100;
+            bool[] vis = new bool[n+1];
+            for (int i = 0; i < n; i++)
+                vis[i] = true;
+            vis[1] = false;
+            int sn = (int)Math.Sqrt(n);
+            for(int i = 2; i <= sn; i++)
+            {
+                if(vis[i] == true)
+                {
+                    int a = i*2;
+                    while(a <= n)
+                    {
+                        vis[a] = false;
+                        a += i;
+                    }
+                }
+            }
+            for(int i = 1; i <= n; i++)
+            {
+                if (vis[i])
+                {
+                    Console.Write(i + " ");
+                }
+            }
         }
     }
 }
