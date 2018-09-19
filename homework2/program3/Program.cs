@@ -20,7 +20,7 @@ namespace program3
             {
                 if(vis[i] == true)
                 {
-                    int a = i*2;
+                    int a = i*i;
                     while(a <= n)
                     {
                         vis[a] = false;
