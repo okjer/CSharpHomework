@@ -80,22 +80,18 @@ namespace program1
             if(type.ToLower() == "rectangle")
             {
                 polygon = new RectanglePolygon(nums);
-                Console.WriteLine("初始化长方形");
             }
             else if (type.ToLower() == "triangle")
             {
                 polygon = new TrianglePolygon(nums);
-                Console.WriteLine("初始化三角形");
             }
             else if (type.ToLower() == "circle")
             {
                 polygon = new CirclePolygon(nums);
-                Console.WriteLine("初始化圆形");
             }
             else if (type.ToLower() == "square")
             {
                 polygon = new SquarePolygon(nums);
-                Console.WriteLine("初始化正方形");
             }
             return polygon;
         }
