@@ -24,6 +24,7 @@ namespace program2
             double tmp = sum / len;
             Console.WriteLine("the max number,min number,sum number,average number is");
             Console.WriteLine(maxn + " " + mixn + " " + sum + " " + Math.Round(tmp));
+            Console.WriteLine($"max = {maxn},min = {mixn}");
         }
     }
 }
