@@ -1,0 +1,7 @@
+D:\cpp\CSharpHomework\homework4\program2\bin\Debug\program2.exe.config
+D:\cpp\CSharpHomework\homework4\program2\bin\Debug\program2.exe
+D:\cpp\CSharpHomework\homework4\program2\bin\Debug\program2.pdb
+D:\cpp\CSharpHomework\homework4\program2\obj\Debug\program2.csprojAssemblyReference.cache
+D:\cpp\CSharpHomework\homework4\program2\obj\Debug\program2.csproj.CoreCompileInputs.cache
+D:\cpp\CSharpHomework\homework4\program2\obj\Debug\program2.exe
+D:\cpp\CSharpHomework\homework4\program2\obj\Debug\program2.pdb
