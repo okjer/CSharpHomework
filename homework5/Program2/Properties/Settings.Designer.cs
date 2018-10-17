@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Program2.Properties
+namespace CayleyTree.Properties
 {
 
 

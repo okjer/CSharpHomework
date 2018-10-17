@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Program1", "Program1\Program1.csproj", "{9F7154DB-AD23-41C5-A3EE-1518E6F35DC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CayleyTree", "..\..\..\download\新建文件夹\homework5\CayleyTree\CayleyTree.csproj", "{16402761-1AED-4BF1-A03F-4FE858185E11}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Program2", "Program2\Program2.csproj", "{16402761-1AED-4BF1-A03F-4FE858185E11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

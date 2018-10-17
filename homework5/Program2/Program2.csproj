@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B8C106C1-FD8D-4655-B03A-C509D0F8F976}</ProjectGuid>
+    <ProjectGuid>{16402761-1AED-4BF1-A03F-4FE858185E11}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Program2</RootNamespace>
-    <AssemblyName>Program2</AssemblyName>
+    <RootNamespace>CayleyTree</RootNamespace>
+    <AssemblyName>CayleyTree</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>

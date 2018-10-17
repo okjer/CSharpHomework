@@ -1,0 +1,10 @@
+D:\download\新建文件夹\homework5\CayleyTree\bin\Debug\CayleyTree.exe.config
+D:\download\新建文件夹\homework5\CayleyTree\bin\Debug\CayleyTree.exe
+D:\download\新建文件夹\homework5\CayleyTree\bin\Debug\CayleyTree.pdb
+D:\download\新建文件夹\homework5\CayleyTree\obj\Debug\CayleyTree.csprojAssemblyReference.cache
+D:\download\新建文件夹\homework5\CayleyTree\obj\Debug\CayleyTree.Form1.resources
+D:\download\新建文件夹\homework5\CayleyTree\obj\Debug\CayleyTree.Properties.Resources.resources
+D:\download\新建文件夹\homework5\CayleyTree\obj\Debug\CayleyTree.csproj.GenerateResource.cache
+D:\download\新建文件夹\homework5\CayleyTree\obj\Debug\CayleyTree.csproj.CoreCompileInputs.cache
+D:\download\新建文件夹\homework5\CayleyTree\obj\Debug\CayleyTree.exe
+D:\download\新建文件夹\homework5\CayleyTree\obj\Debug\CayleyTree.pdb
