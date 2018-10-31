@@ -15,7 +15,7 @@ namespace homework5
     {
 
         // uint : orderDetail's id, OrderDetail : OrderDetail obj
-        private Dictionary<uint, OrderDetail> orderDetailsDict;
+        public Dictionary<uint, OrderDetail> orderDetailsDict;
         public List<OrderDetail> orderList; 
 
         public void UpdateOrderList()
@@ -105,5 +105,12 @@ namespace homework5
             result += "\n================================================================================";
             return result;
         }
+        //public override bool Equal(object other)
+        //{
+        //    bool ret = false;
+        //    var toComparWith = other as Order;
+        //    if (other == null) return ret;
+            
+        //}
     }
 }
