@@ -48,15 +48,15 @@ namespace homework5
         /// <param name="orderId">id of the order which will be canceled</param> 
         public void RemoveOrder(string orderId)
         {
-            //OrderList.RemoveAll(x => x.OrderId.Equals(orderId));
-            foreach (Order order in OrderList)
-            {
-                if (order.OrderId == orderId)
-                {
-                    OrderList.Remove(order);
-                    break;
-                }
-            }
+            OrderList.RemoveAll(x => x.OrderId.Equals(orderId));
+            //foreach (Order order in OrderList)
+            //{
+            //    if (order.OrderId == orderId)
+            //    {
+            //        OrderList.Remove(order);
+            //        break;
+            //    }
+            //}
             return;
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using homework5;
@@ -60,7 +61,11 @@ namespace homework7
         {
             new Form3().ShowDialog();
         }
-
+        /// <summary>
+        /// 按订单号查询
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button4_Click(object sender, System.EventArgs e)
         {
             string i = textBox1.Text;
@@ -84,7 +89,11 @@ namespace homework7
             List<Order> order = os.GetOrdersByCustomerName(s);
             bindingSource1.DataSource = order;
         }
-
+        /// <summary>
+        /// 按商品名查询
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button8_Click(object sender, System.EventArgs e)
         {
             string s = textBox3.Text;
@@ -101,13 +110,24 @@ namespace homework7
         {
             os.XsltTransform();
         }
-
+        /// <summary>
+        /// 删除订单
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button2_Click(object sender, System.EventArgs e)
         {
-            string i = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-            if (i == "") return;
-            os.RemoveOrder(i);
-            bindingSource1.DataSource = os.OrderList;
+            try
+            {
+                string s = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+                if (s == "") return;
+                os.RemoveOrder(s);
+                bindingSource1.DataSource = null;
+                bindingSource1.DataSource = os.OrderList;
+            }catch(Exception exc)
+            {
+                string x = exc.ToString();
+            }
         }
     }
 }

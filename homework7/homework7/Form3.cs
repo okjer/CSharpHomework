@@ -57,6 +57,7 @@ namespace homework7
                 order.AddOrderDetail(item);
             }
             Form1.os.AddOrder(order);
+            Form1.bindingSource1.DataSource = null;
             Form1.bindingSource1.DataSource = Form1.os.OrderList;
             Close();
         }
