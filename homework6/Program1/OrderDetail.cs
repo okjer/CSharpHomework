@@ -23,7 +23,7 @@ namespace homework5
         public OrderDetail(uint orderDetailId, Goods goods, uint quantity)
         {
             OrderDetailId = orderDetailId;
-            Goods = goods;
+            Goods = new Goods(goods.GoodsId, goods.GoodsName, goods.GoodsValue);
             Quantity = quantity;
         }
         public OrderDetail() { }
@@ -32,7 +32,7 @@ namespace homework5
         /// </summary>
         public uint OrderDetailId { get; set; }
 
-        
+
 
         /// <summary>
         /// orderDetail's goods

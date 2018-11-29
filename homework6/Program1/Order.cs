@@ -15,34 +15,28 @@ namespace homework5
     {
 
         // uint : orderDetail's id, OrderDetail : OrderDetail obj
-        public Dictionary<uint, OrderDetail> orderDetailsDict;
-        public List<OrderDetail> orderList; 
-
-        public void UpdateOrderList()
-        {
-            orderList = orderDetailsDict.Values.ToList();
-        }
+        //private Dictionary<uint, OrderDetail> orderDetailsDict;
+        public List<OrderDetail> orderDetailList;
 
         /// <summary>
         /// Order constructor
         /// </summary>
         /// <param name="orderId">order id</param>
         /// <param name="customer">who orders goods</param>
-        public Order() {
-            orderDetailsDict = new Dictionary<uint, OrderDetail>();
-            orderList = new List<OrderDetail>();
+        public Order()
+        {
+            orderDetailList = new List<OrderDetail>();
         }
-        public Order(uint orderId, Customer customer)
+        public Order(string orderId, Customer customer)
         {
             OrderId = orderId;
-            Customer = customer;
-            orderDetailsDict = new Dictionary<uint, OrderDetail>();
-            orderList = new List<OrderDetail>();
+            Customer = new Customer(customer.CustomerId, customer.CustomerName);
+            orderDetailList = new List<OrderDetail>();
         }
         /// <summary>
-        /// order id
+        /// 年月日加三位流水号
         /// </summary>
-        public uint OrderId { get; set; }
+        public string OrderId { get; set; }
         /// <summary>
         /// the man who orders goods
         /// </summary>
@@ -56,13 +50,13 @@ namespace homework5
         /// <param name="orderDetail">the new orderDetail which will be added</param>
         public void AddOrderDetail(OrderDetail orderDetail)
         {
-            if (orderDetailsDict.ContainsKey(orderDetail.OrderDetailId))
+            if (orderDetailList.Contains(orderDetail))
             {
                 throw new Exception($"orderDetails-{orderDetail.OrderDetailId} is already existed!");
             }//"$",占位符，将{}中变量或表达式的值替换
             else
             {
-                orderDetailsDict[orderDetail.OrderDetailId] = orderDetail;
+                orderDetailList.Add(orderDetail);
                 Money += orderDetail.Quantity * (uint)orderDetail.Goods.GoodsValue;
             }
         }
@@ -73,24 +67,19 @@ namespace homework5
         /// <param name="orderDetailId">id of the orderDetail which will be removed</param>
         public void RemoveOrderDetail(uint orderDetailId)
         {
-            if (orderDetailsDict.ContainsKey(orderDetailId))
+            var findList = from n in orderDetailList where n.OrderDetailId == orderDetailId select n;
+            if (findList != null)
             {
-                Money -= orderDetailsDict[orderDetailId].Quantity * (uint)orderDetailsDict[orderDetailId].Goods.GoodsValue;
-                orderDetailsDict.Remove(orderDetailId);
+                foreach (var n in findList)
+                {
+                    Money -= n.Quantity * (uint)n.Goods.GoodsValue;
+                    orderDetailList.Remove(n);
+                }
             }
             else
             {
                 throw new Exception($"orderDetails-{orderDetailId} is not existed!");
             }
-        }
-
-        /// <summary>
-        /// get all orderDetails in this order
-        /// </summary>
-        /// <returns>List<OrderDetail></returns>
-        public List<OrderDetail> QueryAllOrderDetails()
-        {
-            return orderDetailsDict.Values.ToList();
         }
 
         /// <summary>
@@ -101,7 +90,7 @@ namespace homework5
         {
             string result = "================================================================================\n";
             result += $"orderId:{OrderId}, customer:({Customer})";
-            orderList.ForEach(od => result += "\n\t" + od);
+            orderDetailList.ForEach(od => result += "\n\t" + od);
             result += "\n================================================================================";
             return result;
         }
@@ -110,7 +99,7 @@ namespace homework5
         //    bool ret = false;
         //    var toComparWith = other as Order;
         //    if (other == null) return ret;
-            
+
         //}
     }
 }

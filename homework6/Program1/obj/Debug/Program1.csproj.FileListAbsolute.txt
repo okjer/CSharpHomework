@@ -12,3 +12,10 @@ D:\cpp\CSharpHomework\homework6\Program1\obj\Debug\Program1.csprojAssemblyRefere
 D:\cpp\CSharpHomework\homework6\Program1\obj\Debug\Program1.csproj.CoreCompileInputs.cache
 D:\cpp\CSharpHomework\homework6\Program1\obj\Debug\Program1.exe
 D:\cpp\CSharpHomework\homework6\Program1\obj\Debug\Program1.pdb
+C:\Users\86180\Desktop\CSharpHomework\homework6\Program1\bin\Debug\Program1.exe.config
+C:\Users\86180\Desktop\CSharpHomework\homework6\Program1\bin\Debug\Program1.exe
+C:\Users\86180\Desktop\CSharpHomework\homework6\Program1\bin\Debug\Program1.pdb
+C:\Users\86180\Desktop\CSharpHomework\homework6\Program1\obj\Debug\Program1.csprojAssemblyReference.cache
+C:\Users\86180\Desktop\CSharpHomework\homework6\Program1\obj\Debug\Program1.csproj.CoreCompileInputs.cache
+C:\Users\86180\Desktop\CSharpHomework\homework6\Program1\obj\Debug\Program1.exe
+C:\Users\86180\Desktop\CSharpHomework\homework6\Program1\obj\Debug\Program1.pdb

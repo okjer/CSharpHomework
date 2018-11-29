@@ -31,7 +31,6 @@ namespace homework7
         {
             this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -47,6 +46,8 @@ namespace homework7
             this.button7 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.button8 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(bindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -60,16 +61,6 @@ namespace homework7
             this.button1.Text = "创建订单";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(643, 189);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(104, 35);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "删除订单";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -145,7 +136,7 @@ namespace homework7
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.DataBindings.Add(new System.Windows.Forms.Binding("Text",bindingSource1, "OrderId", true));
+            this.label2.DataBindings.Add(new System.Windows.Forms.Binding("Text", bindingSource1, "OrderId", true));
             this.label2.Location = new System.Drawing.Point(146, 373);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(23, 15);
@@ -203,11 +194,33 @@ namespace homework7
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(480, 364);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(111, 33);
+            this.button5.TabIndex = 14;
+            this.button5.Text = "生成html文件";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click_1);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(643, 192);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(104, 30);
+            this.button2.TabIndex = 15;
+            this.button2.Text = "删除订单";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.textBox2);
@@ -219,7 +232,6 @@ namespace homework7
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -233,7 +245,6 @@ namespace homework7
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.DataGridView dataGridView1;
@@ -248,7 +259,9 @@ namespace homework7
         private System.Windows.Forms.DataGridViewTextBoxColumn orderIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn customerDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn moneyDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button button5;
         public static System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

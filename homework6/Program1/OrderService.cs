@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using System.Xml.XPath;
+using System.Xml.Xsl;
 
 namespace homework5
 {
@@ -16,13 +20,13 @@ namespace homework5
     {
 
         // uint : orderId, Order : Order obj
-        public Dictionary<uint, Order> orderDict { get; }
+        public List<Order> OrderList { get; }
         /// <summary>
         /// OrderService constructor
         /// </summary>
         public OrderService()
         {
-            orderDict = new Dictionary<uint, Order>();
+            OrderList = new List<Order>();
         }
 
         /// <summary>
@@ -31,21 +35,29 @@ namespace homework5
         /// <param name="order">the order will be added</param>
         public void AddOrder(Order order)
         {
-            if (orderDict.ContainsKey(order.OrderId))
+            string s = @"^\d{11}$";
+            if (!Regex.IsMatch(order.OrderId, s)) throw new Exception("date is not matching");
+            if (OrderList.Contains(order))
                 throw new Exception($"order-{order.OrderId} is already existed!");
-            orderDict[order.OrderId] = order;
+            else OrderList.Add(order);
         }
 
         /// <summary>
         /// cancel order
         /// </summary>
         /// <param name="orderId">id of the order which will be canceled</param> 
-        public void RemoveOrder(uint orderId)
+        public void RemoveOrder(string orderId)
         {
-            if (orderDict.ContainsKey(orderId))
+            //OrderList.RemoveAll(x => x.OrderId.Equals(orderId));
+            foreach (Order order in OrderList)
             {
-                orderDict.Remove(orderId);
+                if (order.OrderId == orderId)
+                {
+                    OrderList.Remove(order);
+                    break;
+                }
             }
+            return;
         }
 
         /// <summary>
@@ -54,7 +66,7 @@ namespace homework5
         /// <returns>List<Order>:all the orders</returns> 
         public List<Order> QueryAllOrders()
         {
-            return orderDict.Values.ToList();
+            return OrderList;
         }
 
         /// <summary>
@@ -62,14 +74,10 @@ namespace homework5
         /// </summary>
         /// <param name="orderId">id of the order to find</param>
         /// <returns>List<Order></returns> 
-        public List<Order> QueryOrderById(uint orderId)
+        public Order QueryOrderById(string orderId)
         {
-            List<Order> result = new List<Order>();
-            if (orderDict.ContainsKey(orderId))
-            {
-                result.Add(orderDict[orderId]);
-            }
-            return result;
+            var x = from n in OrderList where n.OrderId == orderId select n;
+            return x.ToList().First();
         }
 
         /// <summary>
@@ -92,7 +100,7 @@ namespace homework5
             //    }
             //}
             //var ret = orderDict.Where(a => a.Value.QueryAllOrderDetails().Exists( c => c.Goods.GoodsName == goodsName)).Select<>
-            var ret = from item in orderDict where item.Value.QueryAllOrderDetails().Exists(c => c.Goods.GoodsName == goodsName) select item.Value;
+            var ret = from item in OrderList where item.orderDetailList.Exists(c => c.Goods.GoodsName == goodsName) select item;
             return ret.ToList();
         }
 
@@ -101,15 +109,15 @@ namespace homework5
         /// </summary>
         /// <param name="customerName">customer name</param>
         /// <returns></returns> 
-        public List<Order>  GetOrdersByCustomerName(string customerName)
+        public List<Order> GetOrdersByCustomerName(string customerName)
         {
-            var ret = from item in orderDict where item.Value.Customer.CustomerName == customerName select item.Value;
+            var ret = from item in OrderList where item.Customer.CustomerName == customerName select item;
             return ret.ToList();
         }
 
         public List<Order> GetOrdersByMoney(uint n)
         {
-            var ret = from item in orderDict where item.Value.Money >= n select item.Value;
+            var ret = from item in OrderList where item.Money >= n select item;
             return ret.ToList();
         }
 
@@ -118,11 +126,12 @@ namespace homework5
         /// </summary>
         /// <param name="orderId"> id of the order whoes customer will be update</param>
         /// <param name="newCustomer">the new customer of the order which will be update</param> 
-        public void UpdateOrderCustomer(uint orderId, Customer newCustomer)
+        public void UpdateOrderCustomer(string orderId, Customer newCustomer)
         {
-            if (orderDict.ContainsKey(orderId))
+            Order order = OrderList.Find(n => n.OrderId.Equals(orderId));
+            if (order != null)
             {
-                orderDict[orderId].Customer = newCustomer;
+                order.Customer = new Customer(newCustomer.CustomerId, newCustomer.CustomerName);
             }
             else
             {
@@ -134,24 +143,42 @@ namespace homework5
         /// <summary>
         /// xml序列化
         /// </summary>
-        public void Export(XmlSerializer ser, string FileName, List<Order> orders)
-        { 
-            foreach (Order i in orders)
-            {
-                i.UpdateOrderList();
-            }
-            using (FileStream fs = new FileStream(FileName, FileMode.Create))
-            {
-                ser.Serialize(fs, orders);
-            }
-        }
-        public List<Order> Import(XmlSerializer ser, string fileName)
+        public void Export(object obj, string fileName)
         {
+            XmlSerializer ser = new XmlSerializer(obj.GetType());
+
+            using (FileStream fs = new FileStream(fileName, FileMode.Create))
+            {
+                ser.Serialize(fs, obj);
+            }
+
+        }
+        public List<Order> Import(string fileName)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(List<Order>));
+
             using (FileStream fs = new FileStream(fileName, FileMode.Open))
             {
-                List<Order> obj = (List<Order>)ser.Deserialize(fs);
-                return obj;
-            }                     
+                object obj2 = ser.Deserialize(fs);
+                return obj2 as List<Order>;
+            }
+        }
+        public void XsltTransform()
+        {
+            Export(OrderList, @"..\..\a.xml");
+            XmlDocument xml = new XmlDocument();
+            xml.Load(@"..\..\a.xml");//加载xml文档
+
+            XPathNavigator nav = xml.CreateNavigator();
+            nav.MoveToRoot();//游标移动到根节点
+
+            XslCompiledTransform xt = new XslCompiledTransform();
+            xt.Load(@"..\..\a.xslt");
+
+            FileStream outFileStream = File.OpenWrite(@"..\..\a.html");
+            XmlTextWriter writer =
+                new XmlTextWriter(outFileStream, System.Text.Encoding.UTF8);
+            xt.Transform(nav, null, writer);
         }
     }
 }

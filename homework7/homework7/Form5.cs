@@ -13,17 +13,17 @@ namespace homework7
 {
     public partial class Form5 : Form
     {
-        private uint id;
+        private string id;
         public Form5()
         {
             InitializeComponent();
         }
-        public Form5(uint i)
+        public Form5(string i)
         {
             InitializeComponent();
             id = i;
             bindingSource3.DataSource = null;
-            bindingSource3.DataSource = Form1.os.orderDict[i].orderDetailsDict.Values.ToList();
+            bindingSource3.DataSource = Form1.os.QueryOrderById(id).orderDetailList;
         }
     }
 }

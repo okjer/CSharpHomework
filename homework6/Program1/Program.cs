@@ -12,8 +12,8 @@ namespace homework5
         {
             try
             {
-                Customer customer1 = new Customer(1, "Customer1");
-                Customer customer2 = new Customer(2, "Customer2");
+                Customer customer1 = new Customer(11111111111, "Customer1");
+                Customer customer2 = new Customer(22222222222, "Customer2");
 
                 Goods milk = new Goods(1, "Milk", 69.9);
                 Goods eggs = new Goods(2, "eggs", 4.99);
@@ -23,9 +23,9 @@ namespace homework5
                 OrderDetail orderDetails2 = new OrderDetail(2, eggs, 2);
                 OrderDetail orderDetails3 = new OrderDetail(3, milk, 1);
 
-                Order order1 = new Order(1, customer1);
-                Order order2 = new Order(2, customer2);
-                Order order3 = new Order(3, customer2);
+                Order order1 = new Order("20000317123", customer1);
+                Order order2 = new Order("20000317124", customer2);
+                Order order3 = new Order("20000317125", customer2);
                 order1.AddOrderDetail(orderDetails1);
                 order1.AddOrderDetail(orderDetails2);
                 order1.AddOrderDetail(orderDetails3);
@@ -58,7 +58,7 @@ namespace homework5
                 Console.WriteLine("");
 
                 Console.WriteLine("Remove order(id=2) and qurey all");
-                os.RemoveOrder(2);
+                os.RemoveOrder("2");
                 orders = os.QueryAllOrders();
                 foreach (Order od in orders)
                     Console.WriteLine(od.ToString());
@@ -71,13 +71,13 @@ namespace homework5
                 //序列化
                 XmlSerializer xmlser = new XmlSerializer(typeof(List<Order>));
                 String xmlFileName = "s.xml";
-                os.Export(xmlser,xmlFileName,os.QueryAllOrders());
+                os.Export(os.OrderList,xmlFileName);
                 string s = File.ReadAllText("s.xml");
                 Console.WriteLine(s);
                 //反序列化
-                List<Order> orders1 = os.Import(xmlser, "s.xml");//as List<Order>;
+                List<Order> orders1 = os.Import(xmlFileName);//as List<Order>;
+                //if (orders1 == null) Console.WriteLine("fuck");
                 foreach (Order i in orders1) Console.WriteLine(i);
-                
             }
             catch (Exception e)
             {

@@ -13,13 +13,13 @@ namespace homework7
 {
     public partial class Form2 : Form
     {
-        private uint id;
+        private string id;
         public Form2()
         {
             InitializeComponent();
         }
 
-        public Form2(uint id)
+        public Form2(string id)
         {
             InitializeComponent();
             this.id = id;
@@ -32,10 +32,11 @@ namespace homework7
         private void button1_Click(object sender, EventArgs e)
         {
             string s = textBox1.Text.ToString();
-            uint i = uint.Parse(textBox2.Text.ToString());
-            Form1.os.orderDict[id].Customer.CustomerId = i;
-            Form1.os.orderDict[id].Customer.CustomerName = s;
-            Form1.bindingSource1.DataSource = Form1.os.orderDict.Values.ToList();
+            long i = long.Parse(textBox2.Text.ToString());
+            Order order = Form1.os.QueryOrderById(id);
+            order.Customer.CustomerId = i;
+            order.Customer.CustomerName = s;
+            Form1.bindingSource1.DataSource = Form1.os.OrderList;
             Close();
         }
     }

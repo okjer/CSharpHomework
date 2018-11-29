@@ -11,8 +11,8 @@ namespace homework7
         public Form1()
         {
             InitializeComponent();
-            Customer customer1 = new Customer(1, "Customer1");
-            Customer customer2 = new Customer(2, "Customer2");
+            Customer customer1 = new Customer(11111111111, "Customer1");
+            Customer customer2 = new Customer(22222222222, "Customer2");
 
             Goods milk = new Goods(1, "Milk", 69.9);
             Goods eggs = new Goods(2, "eggs", 4.99);
@@ -22,9 +22,9 @@ namespace homework7
             OrderDetail orderDetails2 = new OrderDetail(2, eggs, 2);
             OrderDetail orderDetails3 = new OrderDetail(3, milk, 1);
 
-            Order order1 = new Order(1, customer1);
-            Order order2 = new Order(2, customer2);
-            Order order3 = new Order(3, customer2);
+            Order order1 = new Order("20000317123", customer1);
+            Order order2 = new Order("20000317124", customer2);
+            Order order3 = new Order("20000317125", customer2);
             order1.AddOrderDetail(orderDetails1);
             order1.AddOrderDetail(orderDetails2);
             order1.AddOrderDetail(orderDetails3);
@@ -37,20 +37,10 @@ namespace homework7
             os.AddOrder(order1);
             os.AddOrder(order2);
             os.AddOrder(order3);
-            
-            bindingSource1.DataSource = os.orderDict.Values.ToList();
+
+            bindingSource1.DataSource = os.OrderList;
         }
-        /// <summary>
-        /// 删除订单
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button2_Click(object sender, System.EventArgs e)
-        {
-            uint i = uint.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString());
-            os.RemoveOrder(i);
-            bindingSource1.DataSource = os.orderDict.Values.ToList();
-        }
+       
         /// <summary>
         /// 修改订单
         /// </summary>
@@ -58,7 +48,7 @@ namespace homework7
         /// <param name="e"></param>
         private void button3_Click(object sender, System.EventArgs e)
         {
-            uint i = uint.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString());
+            string i = dataGridView1.CurrentRow.Cells[0].Value.ToString();
             new Form2(i).ShowDialog();
         }
         /// <summary>
@@ -67,14 +57,14 @@ namespace homework7
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void button1_Click(object sender, System.EventArgs e)
-        { 
+        {
             new Form3().ShowDialog();
         }
 
         private void button4_Click(object sender, System.EventArgs e)
         {
-            uint i = uint.Parse(textBox1.Text);
-            List<Order> order = os.QueryOrderById(i);
+            string i = textBox1.Text;
+            Order order = os.QueryOrderById(i);
             bindingSource1.DataSource = order;
         }
         /// <summary>
@@ -84,7 +74,7 @@ namespace homework7
         /// <param name="e"></param>
         private void button6_Click(object sender, System.EventArgs e)
         {
-            uint i = uint.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString());
+            string i = dataGridView1.CurrentRow.Cells[0].Value.ToString();
             new Form5(i).ShowDialog();
         }
 
@@ -100,6 +90,24 @@ namespace homework7
             string s = textBox3.Text;
             List<Order> order = os.QueryOrdersByGoodsName(s);
             bindingSource1.DataSource = order;
+        }
+
+        /// <summary>
+        /// 生成html文件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button5_Click_1(object sender, System.EventArgs e)
+        {
+            os.XsltTransform();
+        }
+
+        private void button2_Click(object sender, System.EventArgs e)
+        {
+            string i = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            if (i == "") return;
+            os.RemoveOrder(i);
+            bindingSource1.DataSource = os.OrderList;
         }
     }
 }

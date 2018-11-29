@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 
@@ -20,8 +21,8 @@ namespace homework7
                 id = x;
                 value = y;
             }
-        } 
-        private static Dictionary<string, Pair > goods = new Dictionary<string, Pair>()
+        }
+        private static Dictionary<string, Pair> goods = new Dictionary<string, Pair>()
         {
             {"java",new Pair(1,10)},
             {"c#",new Pair(2,20) },
@@ -44,16 +45,19 @@ namespace homework7
         private void button1_Click(object sender, EventArgs e)
         {
             string s = textBox1.Text.ToString();
-            uint i = uint.Parse(textBox2.Text.ToString());
-            uint cusid = uint.Parse(textBox3.Text.ToString());
+            Regex regex = new Regex(@"\d{11}");
+            if (!regex.IsMatch(textBox3.Text))
+                throw new Exception("电话格式不正确");
+            string i = textBox2.Text.ToString();
+            long cusid = long.Parse(textBox3.Text.ToString());
             Customer customer = new Customer(cusid, s);
             Order order = new Order(i, customer);
-            foreach(OrderDetail item in orderDetails)
+            foreach (OrderDetail item in orderDetails)
             {
                 order.AddOrderDetail(item);
             }
             Form1.os.AddOrder(order);
-            Form1.bindingSource1.DataSource = Form1.os.orderDict.Values.ToList();
+            Form1.bindingSource1.DataSource = Form1.os.OrderList;
             Close();
         }
         /// <summary>

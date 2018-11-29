@@ -18,7 +18,7 @@ namespace homework5
         /// </summary>
         /// <param name="id">customer id</param>
         /// <param name="name">customer name </param>
-        public Customer(uint id, string name)
+        public Customer(long id, string name)
         {
             CustomerId = id;
             CustomerName = name;
@@ -26,9 +26,9 @@ namespace homework5
         public Customer() { }
 
         /// <summary>
-        /// customer's identifier
+        /// customer's phonenumber
         /// </summary>
-        public uint CustomerId { get; set; }
+        public long CustomerId { get; set; }
 
         /// <summary>
         /// customer's name
